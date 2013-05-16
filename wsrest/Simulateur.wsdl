@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" name="Simulateur" targetNamespace="http://127.0.0.1/wsrest/" xmlns:tns="http://127.0.0.1/wsrest/" xmlns:impl="http://127.0.0.1/wsrest/" xmlns:xsd1="http://127.0.0.1/wsrest/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">
+  <portType name="SimulateurPortType">
+    <operation name="calculMensualite" parameterOrder="age duree montantApport montantInvestissement">
+      <input message="tns:CalculMensualiteRequest"/>
+      <output message="tns:CalculMensualiteResponse"/>
+    </operation>
+    <operation name="calculMensualiteAssurance" parameterOrder="age duree montantApport montantInvestissement">
+      <input message="tns:CalculMensualiteAssuranceRequest"/>
+      <output message="tns:CalculMensualiteAssuranceResponse"/>
+    </operation>
+    <operation name="calculMensualiteGlobale" parameterOrder="age duree montantApport montantInvestissement">
+      <input message="tns:CalculMensualiteGlobaleRequest"/>
+      <output message="tns:CalculMensualiteGlobaleResponse"/>
+    </operation>
+  </portType>
+  <binding name="SimulateurBinding" type="tns:SimulateurPortType">
+    <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="calculMensualite">
+      <soap:operation soapAction="urn:Simulateur#SimulateurServer#calculMensualite"/>
+      <input>
+        <soap:body parts="age duree montantApport montantInvestissement" use="encoded" namespace="http://127.0.0.1/wsrest/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </input>
+      <output>
+        <soap:body parts="return" use="encoded" namespace="http://127.0.0.1/wsrest/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </output>
+    </operation>
+    <operation name="calculMensualiteAssurance">
+      <soap:operation soapAction="urn:Simulateur#SimulateurServer#calculMensualiteAssurance"/>
+      <input>
+        <soap:body parts="age duree montantApport montantInvestissement" use="encoded" namespace="http://127.0.0.1/wsrest/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </input>
+      <output>
+        <soap:body parts="return" use="encoded" namespace="http://127.0.0.1/wsrest/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </output>
+    </operation>
+    <operation name="calculMensualiteGlobale">
+      <soap:operation soapAction="urn:Simulateur#SimulateurServer#calculMensualiteGlobale"/>
+      <input>
+        <soap:body parts="age duree montantApport montantInvestissement" use="encoded" namespace="http://127.0.0.1/wsrest/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </input>
+      <output>
+        <soap:body parts="return" use="encoded" namespace="http://127.0.0.1/wsrest/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </output>
+    </operation>
+  </binding>
+  <message name="CalculMensualiteRequest">
+    <part name="age" type="xsd:int"/>
+    <part name="duree" type="xsd:int"/>
+    <part name="montantApport" type="xsd:int"/>
+    <part name="montantInvestissement" type="xsd:int"/>
+  </message>
+  <message name="CalculMensualiteResponse">
+    <part name="return" type="xsd:float"/>
+  </message>
+  <message name="CalculMensualiteAssuranceRequest">
+    <part name="age" type="xsd:int"/>
+    <part name="duree" type="xsd:int"/>
+    <part name="montantApport" type="xsd:int"/>
+    <part name="montantInvestissement" type="xsd:int"/>
+  </message>
+  <message name="CalculMensualiteAssuranceResponse">
+    <part name="return" type="xsd:float"/>
+  </message>
+  <message name="CalculMensualiteGlobaleRequest">
+    <part name="age" type="xsd:int"/>
+    <part name="duree" type="xsd:int"/>
+    <part name="montantApport" type="xsd:int"/>
+    <part name="montantInvestissement" type="xsd:int"/>
+  </message>
+  <message name="CalculMensualiteGlobaleResponse">
+    <part name="return" type="xsd:float"/>
+  </message>
+  <service name="SimulateurService">
+    <port name="SimulateurPort" binding="tns:SimulateurBinding">
+      <soap:address location="http://127.0.0.1/wsrest/serviceSimulateur.php"/>
+    </port>
+  </service>
+</definitions>

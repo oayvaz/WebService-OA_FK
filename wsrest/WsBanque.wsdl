@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" name="WsBanque" targetNamespace="http://127.0.0.1/wsrest/" xmlns:tns="http://127.0.0.1/wsrest/" xmlns:impl="http://127.0.0.1/wsrest/" xmlns:xsd1="http://127.0.0.1/wsrest/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">
+  <portType name="WsBanquePortType">
+    <operation name="create" parameterOrder="montantProjet nom prenom adresse cp telephone mail montantApport dureeEmprunt age ville idCN">
+      <input message="tns:CreateRequest"/>
+    </operation>
+    <operation name="statutPret" parameterOrder="id">
+      <input message="tns:StatutPretRequest"/>
+      <output message="tns:StatutPretResponse"/>
+    </operation>
+  </portType>
+  <binding name="WsBanqueBinding" type="tns:WsBanquePortType">
+    <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="create">
+      <soap:operation soapAction="urn:WsBanque#WsBanqueServer#create"/>
+      <input>
+        <soap:body parts="montantProjet nom prenom adresse cp telephone mail montantApport dureeEmprunt age ville idCN" use="encoded" namespace="http://127.0.0.1/wsrest/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </input>
+    </operation>
+    <operation name="statutPret">
+      <soap:operation soapAction="urn:WsBanque#WsBanqueServer#statutPret"/>
+      <input>
+        <soap:body parts="id" use="encoded" namespace="http://127.0.0.1/wsrest/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </input>
+      <output>
+        <soap:body parts="return" use="encoded" namespace="http://127.0.0.1/wsrest/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </output>
+    </operation>
+  </binding>
+  <message name="CreateRequest">
+    <part name="montantProjet" type="xsd:int"/>
+    <part name="nom" type="xsd:string"/>
+    <part name="prenom" type="xsd:string"/>
+    <part name="adresse" type="xsd:string"/>
+    <part name="cp" type="xsd:string"/>
+    <part name="telephone" type="xsd:string"/>
+    <part name="mail" type="xsd:string"/>
+    <part name="montantApport" type="xsd:int"/>
+    <part name="dureeEmprunt" type="xsd:int"/>
+    <part name="age" type="xsd:int"/>
+    <part name="ville" type="xsd:string"/>
+    <part name="idCN" type="xsd:int"/>
+  </message>
+  <message name="StatutPretRequest">
+    <part name="id" type="xsd:int"/>
+  </message>
+  <message name="StatutPretResponse">
+    <part name="return" type="xsd:string"/>
+  </message>
+  <service name="WsBanqueService">
+    <port name="WsBanquePort" binding="tns:WsBanqueBinding">
+      <soap:address location="http://127.0.0.1/wsrest/serviceWsBanque.php"/>
+    </port>
+  </service>
+</definitions>
