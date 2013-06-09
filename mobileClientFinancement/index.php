@@ -8,18 +8,7 @@
     <script src="http://code.jquery.com/jquery-1.9.0.min.js"></script>
     <script src="http://code.jquery.com/mobile/1.3.0-rc.1/jquery.mobile-1.3.0-rc.1.min.js"></script>
 	<SCRIPT language="Javascript">
-	function verifChamp()
-	{
 	
-		if (document.formInfo.nom.value == "" || document.formInfo.prenom.value == "" || document.formInfo.phone.value == "" || document.formInfo.mail.value == "" || document.formInfo.adresse.value == "" || document.formInfo.cp.value == "" || document.formInfo.ville.value == "")
-		 { 
-		   alert("Le formulaire n'est pas complet.");  
-		   return false;   
-		 }
-		 else{
-			document.formInfo.submit();
-		 }
-	 }
 	function verifChampConnexion()
 	{
 		if(document.formComptable.login.value == "")

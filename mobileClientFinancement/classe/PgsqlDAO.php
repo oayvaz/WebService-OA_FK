@@ -6,7 +6,7 @@ abstract class PGsqlDAO implements IDAO {
 	protected $PARAM_port='5432';
 	protected $PARAM_nom_bd='ConstructionNouvelles'; // le nom de votre base de données
 	protected $PARAM_utilisateur='postgres'; // nom d'utilisateur pour se connecter
-	protected $PARAM_mot_passe='0550002D'; // mot de passe de l'utilisateur pour se connecter
+	protected $PARAM_mot_passe='ayvaz'; // mot de passe de l'utilisateur pour se connecter
 	
 	function __construct() {
 		

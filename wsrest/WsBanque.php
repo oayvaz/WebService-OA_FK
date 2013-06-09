@@ -51,9 +51,9 @@ class WsBanque
     public function statutPret($id){
 	// Infos sur la base MySql (à modifier)
 		$host_mysql='localhost';
-		$user_mysql='user';
+		$user_mysql='root';
 		$pass_mysql='';
-		$bd_mysql='CNBanque';
+		$bd_mysql='cnbanque';
 		$link=mysql_connect($host_mysql,$user_mysql,$pass_mysql);
 		mysql_select_db($bd_mysql);
 

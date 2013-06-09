@@ -13,20 +13,44 @@ class Formulaire {
 	public $_adresse;
 	public $_cp;
 	public $_ville;
+	public $_id;
 
 	// Constructeurs
-	function __construct($nom,$prenom,$mail,$phone,$apport,$projet,$duree,$age,$adresse,$cp,$ville) {
-		$this->_nom = $nom;
-		$this->_prenom = $prenom;
-		$this->_mail = $mail;
-		$this->_phone = $phone;
-		$this->_apport = $apport;
-		$this->_projet = $projet;
-		$this->_duree = $duree;
-		$this->_age = $age;
-		$this->_adresse = $adresse;
-		$this->_cp = $cp;
-		$this->_ville = $ville;
+	function __construct() {
+		$num=func_num_args();
+ 
+		switch($num)
+		{
+			case 11:
+				$this->_nom = func_get_arg(0);
+				$this->_prenom = func_get_arg(1);
+				$this->_mail = func_get_arg(2);
+				$this->_phone = func_get_arg(3);;
+				$this->_apport = func_get_arg(4);
+				$this->_projet = func_get_arg(5);
+				$this->_duree = func_get_arg(6);
+				$this->_age = func_get_arg(7);
+				$this->_adresse = func_get_arg(8);
+				$this->_cp = func_get_arg(9);
+				$this->_ville = func_get_arg(10);
+			break;
+			case 12:
+				$this->_nom = func_get_arg(0);
+				$this->_prenom = func_get_arg(1);
+				$this->_mail = func_get_arg(2);
+				$this->_phone = func_get_arg(3);;
+				$this->_apport = func_get_arg(4);
+				$this->_projet = func_get_arg(5);
+				$this->_duree = func_get_arg(6);
+				$this->_age = func_get_arg(7);
+				$this->_adresse = func_get_arg(8);
+				$this->_cp = func_get_arg(9);
+				$this->_ville = func_get_arg(10);
+				$this->_id = func_get_arg(11);
+			break;
+			default:
+			break;
+		}
 	}
 
 	// Accesseur
@@ -68,6 +92,10 @@ class Formulaire {
 	public function getVille() {
 		return $this->_ville;
 	}
+	
+	public function getId() {
+		return $this->_id;
+	}
 
 	// Modificateur
 	public function setNom($_unNom) {
@@ -107,6 +135,9 @@ class Formulaire {
 	public function setVille($_uneVille) {
 		$this->_ville = $_uneVille;
 	}
+	public function setId($_unId) {
+		$this->_id = $_unId;
+	}
 	
 	public function toString() {
 		return array(
@@ -121,6 +152,7 @@ class Formulaire {
 				9 => $this->getAdresse(),
 				10 => $this->getCp(),
 				11 => $this->getVille(),
+				12 => $this->getId()
 		);
 	}
 

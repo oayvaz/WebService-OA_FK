@@ -14,7 +14,7 @@ class pdoIntranet {
         private static $serveur='pgsql:host=localhost';
       	private static $bdd='dbname=ConstructionNouvelles';   		
       	private static $user='postgres' ;    		
-      	private static $mdp='0550002D' ;	
+      	private static $mdp='ayvaz' ;	
 		private static $monPdo;
 		private static $monPdoIntranet=null;
                 

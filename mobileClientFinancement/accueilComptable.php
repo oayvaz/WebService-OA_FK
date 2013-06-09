@@ -26,8 +26,8 @@ $listeFormulaire=$daoFormulaire->findAll();
 $pdo=new pdoIntranet();
 $login = $_REQUEST['login'];
 $mdp = $_REQUEST['password'];
-$client = $pdo->getInfosComptable($login,$mdp);
-		if(!$client){?>
+$client1 = $pdo->getInfosComptable($login,$mdp);
+		if(!$client1){?>
 		<div data-role="header">
 			<h1>Plateforme comptable</h1><a href="" data-rel="back">Retour</a>
 		</div>
@@ -38,7 +38,7 @@ $client = $pdo->getInfosComptable($login,$mdp);
 		
 ?>
 <div data-role="header">
-    <h1>Plateforme comptable<?php echo " ".$client[1].""; ?></h1><a href="index.php">Deconnexion</a>
+    <h1>Plateforme comptable<?php echo " ".$client1[1].""; ?></h1><a href="index.php">Deconnexion</a>
 </div>
 <h2>Bienvenue sur l'accueil comptable, voici les préts en cours:</h2>
 <center>
@@ -79,7 +79,12 @@ $client = $pdo->getInfosComptable($login,$mdp);
 				<td><center><?php echo $formulaireIntoTable[9]; ?></center></td>
 				<td><center><?php echo $formulaireIntoTable[10]; ?></center></td>
 				<td><center><?php echo $formulaireIntoTable[11]; ?></center></td>
-				<td><center>he he !</center></td>
+				<td><center><?php try{
+										$stat=$client->statutPret($formulaireIntoTable[12]);
+									}catch(SoapFault $e){
+										echo var_dump($e);
+									}
+									echo $stat;/*echo "blabla";*/  ?></center></td>
 			</tr>
 		
 	

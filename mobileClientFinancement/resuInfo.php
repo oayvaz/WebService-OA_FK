@@ -10,9 +10,14 @@ require_once 'classe/FormulaireDAO.php';
 
 $daoFormulaire = new FormulaireDAO();
 $newFormulaire= new Formulaire($_POST['nom'], $_POST['prenom'], $_POST['mail'], $_POST['phone'], $_SESSION['apport'], $_SESSION['projet'], $_SESSION['duree'], $_SESSION['age'], $_POST['adresse'], $_POST['cp'], $_POST['ville']);
+
 $daoFormulaire->create($newFormulaire);
+$idCn = 2;
+$idCn = $daoFormulaire->findId($newFormulaire);
+echo var_dump($idCn);
+
 try{
-	$client->create($_SESSION['projet'],$_POST['nom'],$_POST['prenom'],$_POST['adresse'],$_POST['cp'],$_POST['phone'],$_POST['mail'],$_SESSION['apport'],$_SESSION['duree'],$_SESSION['age'],$_POST['ville'],1);
+	$client->create($_SESSION['projet'],$_POST['nom'],$_POST['prenom'],$_POST['adresse'],$_POST['cp'],$_POST['phone'],$_POST['mail'],$_SESSION['apport'],$_SESSION['duree'],$_SESSION['age'],$_POST['ville'],$idCn);
 }catch(SoapFault $e){
 	echo var_dump($e);
 }

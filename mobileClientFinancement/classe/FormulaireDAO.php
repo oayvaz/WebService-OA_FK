@@ -9,6 +9,7 @@ public function __construct(){
 
 public function create($_o) {
 	//echo var_dump($_o);
+	//echo var_dump($this);
 	$connexion = new PDO('pgsql:host='.$this->PARAM_hote.';dbname='.$this->PARAM_nom_bd, $this->PARAM_utilisateur, $this->PARAM_mot_passe);
 	try{
 		$requete_create=$connexion->prepare("insert into \"infoPret\" values (:projet,:nom,:prenom,:adresse,:cp,:phone,:mail,:apport,:duree,:age,:ville)"); // on prépare notre requête
@@ -20,6 +21,26 @@ public function create($_o) {
 		echo 'N° : '.$e->getCode();
 	}
 }
+public function findId($_o) {
+	$connexion = new PDO('pgsql:host='.$this->PARAM_hote.';dbname='.$this->PARAM_nom_bd, $this->PARAM_utilisateur, $this->PARAM_mot_passe);
+		try {
+		$sql = "select id from \"infoPret\" where nom='".$_o->_nom."' and prenom='".$_o->_prenom."' and telephone='".$_o->_phone."' and mail='".$_o->_mail."'";
+		$requete_findId=$connexion->query($sql);
+		$ls = Array();
+		while($ligne = $requete_findId->fetch(PDO::FETCH_OBJ) ){
+			$id=$ligne->id;
+			$ls[]=$id;
+		}
+		} catch(Exception $e) {
+		echo $e->getMessage();
+		$ls[0]=-1;
+		}
+	//echo($requete_findId);
+	//while ($ligne=$requete_findId->fetch(PDO::FETCH_ASSOC)){
+	//$id = $requete_findId;
+	//}
+	return $ls[0];
+}
 
 public function findAll() {
 	$connexion = new PDO('pgsql:host='.$this->PARAM_hote.';dbname='.$this->PARAM_nom_bd, $this->PARAM_utilisateur, $this->PARAM_mot_passe);
@@ -27,21 +48,11 @@ public function findAll() {
 	$requete_findAll=$connexion->query($sql);
 	$liste=array();
 	while ($ligne=$requete_findAll->fetch(PDO::FETCH_OBJ)){
-		$f = new formulaire($ligne->nom,$ligne->prenom,$ligne->mail,$ligne->telephone,$ligne->montantApport,$ligne->montantProjet,$ligne->dureeEmprunt,$ligne->age,$ligne->adresse,$ligne->cp,$ligne->ville);
+		$f = new formulaire($ligne->nom,$ligne->prenom,$ligne->mail,$ligne->telephone,$ligne->montantApport,$ligne->montantProjet,$ligne->dureeEmprunt,$ligne->age,$ligne->adresse,$ligne->cp,$ligne->ville,$ligne->id);
 		$liste[]=$f;
 	}
 	return $liste;
 }
-/*
-public function findById($_id) {
-	$connexion = new PDO('pgsql:host='.$this->PARAM_hote.';dbname='.$this->PARAM_nom_bd, $this->PARAM_utilisateur, $this->PARAM_mot_passe);
-	$sql = "select * from terrain Where id=".$_id;
-	$requete_findById=$connexion->query($sql);
-	$ligne=$requete_findById->fetch(PDO::FETCH_OBJ);
-	$t = new terrain($ligne->id, $ligne->latitude, $ligne->longitude, $ligne->superficie, $ligne->plan, $ligne->prix,$ligne->id_secteur);
-	
-	return $t;
-}*/
 
 }
 ?>
